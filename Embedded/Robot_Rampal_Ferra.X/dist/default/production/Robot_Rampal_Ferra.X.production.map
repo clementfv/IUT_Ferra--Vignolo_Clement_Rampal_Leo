@@ -84,9 +84,9 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x148           0x1ec  (492)
-.text                        0x348               0x174           0x22e  (558)
+.text                        0x348               0x162           0x213  (531)
 
-                   Total "program" memory used (bytes):          0x41a  (1050) <1%
+                   Total "program" memory used (bytes):          0x3ff  (1023) <1%
 
 
 Auxflash Memory  [Origin = 0x7fc000, Length = 0x3ffa]
@@ -286,12 +286,12 @@ __FUID0
  .debug_abbrev      0x016f         0xb1 build/default/production/IO.o
  .debug_abbrev      0x0220         0xe0 build/default/production/timer.o
 
-.debug_line         0x0000        0x556
+.debug_line         0x0000        0x552
  *(.debug_line)
- .debug_line        0x0000        0x13b build/default/production/main.o
- .debug_line        0x013b        0x158 build/default/production/ChipConfig.o
- .debug_line        0x0293        0x149 build/default/production/IO.o
- .debug_line        0x03dc        0x17a build/default/production/timer.o
+ .debug_line        0x0000        0x137 build/default/production/main.o
+ .debug_line        0x0137        0x158 build/default/production/ChipConfig.o
+ .debug_line        0x028f        0x149 build/default/production/IO.o
+ .debug_line        0x03d8        0x17a build/default/production/timer.o
 
 .debug_frame        0x0000        0x13e
  *(.debug_frame)
@@ -3200,7 +3200,7 @@ __c30_signature
  .ivt._T3Interrupt
                   0x000024          0x2 build/default/production/timer.o
 
-.text             0x000348        0x174
+.text             0x000348        0x162
  .text            0x000348         0x9c build/default/production/ChipConfig.o
                   0x000348                  _InitOscillator
  .text            0x0003e4         0x54 build/default/production/IO.o
@@ -3210,5 +3210,5 @@ __c30_signature
  .text            0x000438         0x52 build/default/production/timer.o
                   0x000438                  _InitTimer1
                   0x000456                  _InitTimer23
- .text            0x00048a         0x32 build/default/production/main.o
+ .text            0x00048a         0x20 build/default/production/main.o
                   0x00048a                  _main
