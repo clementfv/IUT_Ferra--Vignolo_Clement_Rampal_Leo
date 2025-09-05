@@ -3,6 +3,7 @@
 #include <xc.h>
 #include "ChipConfig.h"
 #include "IO.h"
+#include "timer.h"
 
 int main(void) {
 
@@ -22,5 +23,9 @@ int main(void) {
     
     while (1) {
         LED_BLANCHE_1 = !LED_BLANCHE_1 ;
+        LED_BLEUE_1 = !LED_BLEUE_1;
+        LED_ORANGE_1 = !LED_ORANGE_1;
+        LED_ROUGE_1 = !LED_ROUGE_1;
+        LED_VERTE_1 = !LED_VERTE_1;
     } // fin main
 }
