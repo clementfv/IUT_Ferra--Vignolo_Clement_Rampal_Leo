@@ -21,5 +21,6 @@ int main(void) {
     LED_VERTE_2 = 1;
     
     while (1) {
+        LED_BLANCHE_1 = !LED_BLANCHE_1 ;
     } // fin main
 }
