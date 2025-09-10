@@ -1,11 +1,11 @@
 #ifndef	TOOLBOX_H
 
 #define PI 3.141592653589793
-void ABS(float value);
-void MAX(float value, float value2);
-void MIN(float value, float value2);
-void LimitToInterval(float value, float lowLimit, float highLimit);
-void RadianToDegree(float value);
-void DegreeToRadian(float value);
+float ABS(float value);
+float MAX(float value, float value2);
+float MIN(float value, float value2);
+float LimitToInterval(float value, float lowLimit, float highLimit);
+float RadianToDegree(float value);
+float DegreeToRadian(float value);
 
 #endif 
