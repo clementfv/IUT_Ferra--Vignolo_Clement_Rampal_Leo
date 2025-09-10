@@ -1,5 +1,4 @@
 #ifndef ROBOT_H
-#define ROBOT_H
 typedef struct robotStateBITS {
 union {
 struct {

@@ -1,10 +1,11 @@
-/* 
- * File:   Toolbox.h
- * Author: E306-PC4
- *
- * Created on 10 septembre 2025, 09:14
- */
+#ifndef	TOOLBOX_H
 
-#ifndef TOOLBOX_H
-#define	TOOLBOX_H
 #define PI 3.141592653589793
+void ABS(float value);
+void MAX(float value, float value2);
+void MIN(float value, float value2);
+void LimitToInterval(float value, float lowLimit, float highLimit);
+void RadianToDegree(float value);
+void DegreeToRadian(float value);
+
+#endif 

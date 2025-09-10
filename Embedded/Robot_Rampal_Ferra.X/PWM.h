@@ -4,20 +4,7 @@
  *
  * Created on 10 septembre 2025, 09:22
  */
-
-#ifndef PWM_H
-#define	PWM_H
-
-#ifdef	__cplusplus
-extern "C" {
+#ifndef	PWM_H
+ void PWMSetSpeed(float vitesseEnPourcents);
+ void InitPWM(void);
 #endif
-
-
-
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* PWM_H */
-

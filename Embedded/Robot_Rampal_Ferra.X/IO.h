@@ -1,5 +1,4 @@
 #ifndef IO_H
-#define IO_H
 
 //Affectation des pins des LEDS    
 #define LED_BLANCHE_1 _LATJ6
