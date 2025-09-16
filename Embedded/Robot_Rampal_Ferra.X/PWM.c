@@ -18,12 +18,21 @@ FCLCON2 = 0x0003; //ÈDsactive la gestion des faults
 PTCONbits.PTEN = 1;
 }
 double talon = 50;
-void PWMSetSpeed(float vitesseEnPourcents)
+void PWMSetSpeed(float vitesseEnPourcents, float moteur)
 {
+if (moteur < 1){
 PDC1 = vitesseEnPourcents * PWMPER + talon;
 SDC1 = talon;
 if (vitesseEnPourcents < 0){
     PDC1 = talon;
     SDC1 = -vitesseEnPourcents * PWMPER + talon;
+}}
+if (moteur > 0){
+    PDC2 = talon; 
+    SDC2 = vitesseEnPourcents * PWMPER + talon;
+    if (vitesseEnPourcents < 0){
+    PDC2 = -vitesseEnPourcents * PWMPER + talon; 
+    SDC2 = talon;
+}
 }
 }
