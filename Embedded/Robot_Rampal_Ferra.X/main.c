@@ -28,9 +28,9 @@ int main(void) {
     LED_ORANGE_1 = 1;
     LED_ROUGE_1 = 1;
     LED_VERTE_1 = 1;                                                
-    LED_BLANCHE_2 = 1;
-    LED_BLEUE_2 = 1;
-    LED_ORANGE_2 = 1;
+    // LED_BLANCHE_2 = 1;
+   // LED_BLEUE_2 = 1;
+    //LED_ORANGE_2 = 1;
     LED_ROUGE_2 = 1;
     LED_VERTE_2 = 1;
     
@@ -41,6 +41,21 @@ int main(void) {
            ADCValue1 = result[1];
            ADCValue2 = result[2];
            ADCClearConversionFinishedFlag();
+        }
+                        if(ADCValue0 >= 0X0495 ){
+                LED_BLANCHE_2 = 1;
+        } else {
+                LED_BLANCHE_2 = 0;
+        }
+                if(ADCValue1 >= 0X0495 ){
+                LED_BLEUE_2 = 1;
+        } else { 
+               LED_BLEUE_2 = 0;
+        }
+                        if(ADCValue2 >= 0X0495 ){
+                LED_ORANGE_2 = 1;
+        } else {
+                LED_ORANGE_2 = 0;
         }
     }
 }// fin main
