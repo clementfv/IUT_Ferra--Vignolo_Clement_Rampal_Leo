@@ -8,7 +8,9 @@
 #include "robot.h"
 #include "PWM.h"
 #include "ADC.h"
-
+    int ADCValue0;
+    int ADCValue1;
+    int ADCValue2;
 int main(void) {
 
     InitOscillator();
@@ -17,9 +19,7 @@ int main(void) {
     InitTimer23();
     InitPWM();
     InitADC1();
-    int ADCValue0;
-    int ADCValue1;
-    int ADCValue2;
+
  //   PWMSetSpeedConsigne(0, MOTEUR_DROIT);
  //  PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
 
@@ -36,11 +36,11 @@ int main(void) {
     
     while (1) {
         if(ADCIsConversionFinished()){
-            unsigned int * result = ADCGetResult();
-           ADCValue0 = ADCGetResult(0); 
-           ADCValue1 = ADCGetResult(1);
-           ADCValue2 = ADCGetResult(2);
+           unsigned int * result = ADCGetResult();
+           ADCValue0 = result[0]; 
+           ADCValue1 = result[1];
+           ADCValue2 = result[2];
            ADCClearConversionFinishedFlag();
         }
-    } // fin main
-}
+    }
+}// fin main
