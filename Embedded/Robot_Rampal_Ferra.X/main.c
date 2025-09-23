@@ -7,6 +7,7 @@
 #include "Toolbox.h"
 #include "robot.h"
 #include "PWM.h"
+#include "ADC.h"
 
 int main(void) {
 
@@ -16,6 +17,9 @@ int main(void) {
     InitTimer23();
     InitPWM();
     InitADC1();
+    int ADCValue0;
+    int ADCValue1;
+    int ADCValue2;
  //   PWMSetSpeedConsigne(0, MOTEUR_DROIT);
  //  PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
 
@@ -31,5 +35,12 @@ int main(void) {
     LED_VERTE_2 = 1;
     
     while (1) {
+        if(ADCIsConversionFinished()){
+            unsigned int * result = ADCGetResult();
+           ADCValue0 = ADCGetResult(0); 
+           ADCValue1 = ADCGetResult(1);
+           ADCValue2 = ADCGetResult(2);
+           ADCClearConversionFinishedFlag();
+        }
     } // fin main
 }
