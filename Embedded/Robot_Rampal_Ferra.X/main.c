@@ -8,6 +8,7 @@
 #include "robot.h"
 #include "PWM.h"
 #include "ADC.h"
+#include "main.h"
 int ADCValue0;
 int ADCValue1;
 int ADCValue2;
@@ -17,6 +18,7 @@ int main(void) {
     InitOscillator();
     InitIO();
     InitTimer1();
+    InitTimer4();
     InitTimer23();
     InitPWM();
     InitADC1();

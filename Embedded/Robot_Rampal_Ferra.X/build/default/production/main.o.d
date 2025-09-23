@@ -1,5 +1,5 @@
 build/default/production/main.o: main.c ChipConfig.h IO.h timer.h \
- Toolbox.h robot.h PWM.h ADC.h
+ Toolbox.h robot.h PWM.h ADC.h main.h
 
 ChipConfig.h:
 
@@ -14,3 +14,5 @@ robot.h:
 PWM.h:
 
 ADC.h:
+
+main.h:
