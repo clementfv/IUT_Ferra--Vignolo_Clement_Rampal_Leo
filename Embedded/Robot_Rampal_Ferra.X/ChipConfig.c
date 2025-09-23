@@ -1,5 +1,5 @@
 #include "ChipConfig.h"
-
+#include "timer.h"
 // DSPIC33EP512MU814 Configuration Bit Settings
 
 // 'C' source line config statements

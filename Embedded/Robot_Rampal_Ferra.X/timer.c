@@ -6,6 +6,8 @@
 #include "main.h"
 #include "ChipConfig.h"
 
+unsigned long timestamp;
+
 //Initialisation d?un timer 16 bits
 
 void InitTimer1(void) {
@@ -21,7 +23,7 @@ void InitTimer1(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
-  //  LED_BLANCHE_1 = !LED_BLANCHE_1;
+    //  LED_BLANCHE_1 = !LED_BLANCHE_1;
     LED_BLEUE_1 = !LED_BLEUE_1;
     PWMUpdateSpeed();
     ADC1StartConversionSequence();
@@ -41,7 +43,8 @@ void InitTimer4(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     IFS1bits.T4IF = 0;
-      LED_BLANCHE_1 = !LED_BLANCHE_1;
+    LED_BLANCHE_1 = !LED_BLANCHE_1;
+    timestamp = timestamp ++;
 }
 
 void InitTimer23(void) {
@@ -92,7 +95,6 @@ void SetFreqTimer1(float freq) {
     } else
         PR1 = (int) (FCY / freq);
 }
-
 
 void SetFreqTimer4(float freq2) {
     T4CONbits.TCKPS = 0b00; //00 = 1:1 prescaler value
