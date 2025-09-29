@@ -25,6 +25,8 @@ int main(void) {
 
     //   PWMSetSpeedConsigne(0, MOTEUR_DROIT);
     //  PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
+    // SetNextRobotStateInAutomaticMode();
+   // OperatingSystemLoop();
 
     LED_BLANCHE_1 = 1;
     LED_BLEUE_1 = 1;
@@ -65,7 +67,9 @@ int main(void) {
             LED_ORANGE_2 = 1;
         }
     }
-    unsigned char stateRobot;
+}// fin main
+
+unsigned char stateRobot;
 
     void OperatingSystemLoop(void) {
         switch (stateRobot) {
@@ -87,7 +91,7 @@ int main(void) {
                 SetNextRobotStateInAutomaticMode();
                 break;
             case STATE_TOURNE_GAUCHE:
-                PWMSetSpeedConsigne(30, MOTEUR_DROIT);
+                PWMSetSpeedConsigne(15, MOTEUR_DROIT);
                 PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
                 stateRobot = STATE_TOURNE_GAUCHE_EN_COURS;
                 break;
@@ -96,7 +100,7 @@ int main(void) {
                 break;
             case STATE_TOURNE_DROITE:
                 PWMSetSpeedConsigne(0, MOTEUR_DROIT);
-                PWMSetSpeedConsigne(30, MOTEUR_GAUCHE);
+                PWMSetSpeedConsigne(15, MOTEUR_GAUCHE);
                 stateRobot = STATE_TOURNE_DROITE_EN_COURS;
                 break;
             case STATE_TOURNE_DROITE_EN_COURS:
@@ -127,7 +131,6 @@ int main(void) {
 
     void SetNextRobotStateInAutomaticMode() {
         unsigned char positionObstacle = PAS_D_OBSTACLE;
-        //ÈDtermination de la position des obstacles en fonction des ÈÈËtlmtres
         if (robotState.distanceTelemetreDroit < 30 &&
                 robotState.distanceTelemetreCentre > 20 &&
                 robotState.distanceTelemetreGauche > 30) //Obstacle ‡droite
@@ -155,5 +158,3 @@ int main(void) {
         if (nextStateRobot != stateRobot - 1)
             stateRobot = nextStateRobot;
     }
-
-}// fin main
