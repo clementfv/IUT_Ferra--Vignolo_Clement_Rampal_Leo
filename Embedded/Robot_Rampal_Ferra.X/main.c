@@ -25,7 +25,6 @@ int main(void) {
 
     //   PWMSetSpeedConsigne(0, MOTEUR_DROIT);
     //  PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
-    // SetNextRobotStateInAutomaticMode();
    // OperatingSystemLoop();
 
     LED_BLANCHE_1 = 1;
