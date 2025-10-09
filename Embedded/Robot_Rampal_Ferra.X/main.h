@@ -17,12 +17,14 @@
 #define STATE_RECULE_EN_COURS 15
 #define STATE_TOURNE_GAUCHE_LOIN 16
 #define STATE_TOURNE_DROITE_LOIN 17
+#define STATE_RALENTIR 18
 #define PAS_D_OBSTACLE 0
 #define OBSTACLE_A_GAUCHE 1
 #define OBSTACLE_A_DROITE 2
 #define OBSTACLE_EN_FACE 3
 #define OBSTACLE_A_GAUCHE_LOIN 4
 #define OBSTACLE_A_DROITE_LOIN 5
+#define OBSTACLE_AUTOUR 5
 void OperatingSystemLoop(void);
 void SetNextRobotStateInAutomaticMode();
 #endif 
