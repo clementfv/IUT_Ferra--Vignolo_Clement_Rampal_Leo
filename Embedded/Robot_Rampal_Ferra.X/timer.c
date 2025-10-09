@@ -12,7 +12,7 @@ unsigned long timestamp;
 
 void InitTimer1(void) {
     //Timer1 pour horodater les mesures (1ms)
-    SetFreqTimer1(50);
+    SetFreqTimer1(500);
     T1CONbits.TON = 0; // Disable Timer
     T1CONbits.TCS = 0; //clock source = internal clock
     IFS0bits.T1IF = 0; // Clear Timer Interrupt Flag
@@ -30,7 +30,7 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
 
 void InitTimer4(void) {
     //Timer4 pour horodater les mesures (1ms)
-    SetFreqTimer4(300);
+    SetFreqTimer4(1000);
     T4CONbits.TON = 0; // Disable Timer
     T4CONbits.TCS = 0; //clock source = internal clock
     IFS1bits.T4IF = 0; // Clear Timer Interrupt Flag

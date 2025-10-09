@@ -41,7 +41,7 @@ void PWMSetSpeed(float vitesseEnPourcents, float moteur) {
     }
 }
 
-float acceleration = 999999;
+float acceleration = 999999999999999;
 
 void PWMUpdateSpeed() {
     // Cette fonction est appelee sur timer et permet de suivre des rampes d acceleration
