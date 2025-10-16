@@ -163,11 +163,11 @@ unsigned char stateRobot;
         unsigned char positionObstacle = PAS_D_OBSTACLE;
         if (robotState.distanceTelemetreDroit < 45 &&
                 robotState.distanceTelemetreCentre > 40 &&
-                robotState.distanceTelemetreGauche > 45) //Obstacle àdroite
+                robotState.distanceTelemetreGauche > 45) //Obstacle ?droite
             positionObstacle = OBSTACLE_A_DROITE;
         else if (robotState.distanceTelemetreDroit > 45 &&
                 robotState.distanceTelemetreCentre > 40 &&
-                robotState.distanceTelemetreGauche < 45) //Obstacle àgauche
+                robotState.distanceTelemetreGauche < 45) //Obstacle ?gauche
             positionObstacle = OBSTACLE_A_GAUCHE;
         else if (robotState.distanceTelemetreCentre < 35) //Obstacle en face
             positionObstacle = OBSTACLE_EN_FACE;
@@ -176,7 +176,7 @@ unsigned char stateRobot;
                 robotState.distanceTelemetreGauche > 45) //pas d?obstacle
             positionObstacle = PAS_D_OBSTACLE;
         else if (robotState.distanceTelemetreCentre > 40 &&
-                robotState.distanceTelemetreUltraGauche < robotState.distanceTelemetreUltraDroit) //Obstacle àgauche
+                robotState.distanceTelemetreUltraGauche < robotState.distanceTelemetreUltraDroit) //Obstacle ?gauche
             positionObstacle = OBSTACLE_A_GAUCHE_LOIN;
         else if (robotState.distanceTelemetreUltraDroit < robotState.distanceTelemetreUltraGauche)
             positionObstacle = OBSTACLE_A_DROITE_LOIN;
@@ -184,7 +184,7 @@ unsigned char stateRobot;
             positionObstacle = PAS_D_OBSTACLE;
          else if ( (robotState.distanceTelemetreUltraDroit || robotState.distanceTelemetreUltraGauche || robotState.distanceTelemetreCentre)<20 ) 
             positionObstacle = OBSTACLE_AUTOUR;
-        //éDtermination de lé?tat àvenir du robot
+        //?Dtermination de l??tat ?venir du robot
         if (positionObstacle == PAS_D_OBSTACLE)
             nextStateRobot = STATE_AVANCE;
         else if (positionObstacle == OBSTACLE_A_DROITE)
@@ -199,7 +199,7 @@ unsigned char stateRobot;
             nextStateRobot = STATE_TOURNE_GAUCHE_LOIN;
         else if (positionObstacle == OBSTACLE_AUTOUR)
             nextStateRobot = STATE_RALENTIR;
-        //Si l?on n?est pas dans la transition de lé?tape en cours
+        //Si l?on n?est pas dans la transition de l??tape en cours
         if (nextStateRobot != stateRobot - 1)
             stateRobot = nextStateRobot;
     }
