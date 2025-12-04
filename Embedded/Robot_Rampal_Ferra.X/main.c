@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
+#include <libpic30.h> 
 #include "ChipConfig.h"
 #include "IO.h"
 #include "timer.h"
@@ -11,6 +12,7 @@
 #include "main.h"
 #include "UART.h"
 #include "CB_TX1.h"
+#include "CB_RX1.h"
 int ADCValue0;
 int ADCValue1;
 int ADCValue2;
@@ -60,9 +62,18 @@ int main(void) {
         }
         
         //SendMessageDirect((unsigned char*) "Bonjour", 7);
-       unsigned char msg[] = "Bonjour\n";
-       SendMessage(msg, sizeof(msg) - 1);
-       __delay32(40000000);
+//       unsigned char msg[] = "Bonjour\n";
+//       SendMessage(msg, sizeof(msg) - 1);
+//       __delay32(40000000);
+        
+        int i;
+        for(i=0; i< CB_RX1_GetDataSize(); i++)
+            {
+                unsigned char c = CB_RX1_Get();
+                SendMessage(&c,1);
+            }
+        __delay32(50000);
+
 
         if (robotState.distanceTelemetreGauche >= 30) {
             LED_BLEUE_1 = 0;
