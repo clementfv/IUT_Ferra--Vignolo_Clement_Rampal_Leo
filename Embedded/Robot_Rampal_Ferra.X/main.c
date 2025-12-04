@@ -9,6 +9,8 @@
 #include "PWM.h"
 #include "ADC.h"
 #include "main.h"
+#include "UART.h"
+#include "CB_TX1.h"
 int ADCValue0;
 int ADCValue1;
 int ADCValue2;
@@ -24,6 +26,7 @@ int main(void) {
     InitTimer23();
     InitPWM();
     InitADC1();
+    InitUART();
 
     //   PWMSetSpeedConsigne(0, MOTEUR_DROIT);
     //  PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
@@ -55,6 +58,11 @@ int main(void) {
             volts = ((float) result [0])* 3.3 / 4096;
             robotState.distanceTelemetreUltraGauche = 34 / volts - 5;
         }
+        
+        //SendMessageDirect((unsigned char*) "Bonjour", 7);
+       unsigned char msg[] = "Bonjour\n";
+       SendMessage(msg, sizeof(msg) - 1);
+       __delay32(40000000);
 
         if (robotState.distanceTelemetreGauche >= 30) {
             LED_BLEUE_1 = 0;
