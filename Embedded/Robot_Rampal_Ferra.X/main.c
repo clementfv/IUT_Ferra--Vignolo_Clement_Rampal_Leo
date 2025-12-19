@@ -13,11 +13,14 @@
 #include "UART.h"
 #include "CB_TX1.h"
 #include "CB_RX1.h"
+#include "UART_Protocol.h"
+
 int ADCValue0;
 int ADCValue1;
 int ADCValue2;
 int ADCValue3;
 int ADCValue4;
+unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
 
 int main(void) {
 
@@ -60,7 +63,8 @@ int main(void) {
             volts = ((float) result [0])* 3.3 / 4096;
             robotState.distanceTelemetreUltraGauche = 34 / volts - 5;
         }
-        
+        UartEncodeAndSendMessage(0x0080, 7, payload);
+        __delay32(40000000);
         //SendMessageDirect((unsigned char*) "Bonjour", 7);
 //       unsigned char msg[] = "Bonjour\n";
 //       SendMessage(msg, sizeof(msg) - 1);
@@ -73,8 +77,7 @@ int main(void) {
                 SendMessage(&c,1);
             }
         __delay32(10);
-
-
+        
         if (robotState.distanceTelemetreGauche >= 30) {
             LED_BLEUE_1 = 0;
         } else {

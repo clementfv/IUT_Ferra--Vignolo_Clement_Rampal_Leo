@@ -10,8 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,14 +20,46 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="Emission" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="1" >
-            <TextBox x:Name="textBoxEmission" RenderTransformOrigin="6.886,5.186" Background="{x:Null}" BorderBrush="{x:Null}" AcceptsReturn="True" KeyUp="TextBoxKey_Up" TextChanged="textBoxEmission_TextChanged" />
+        <GroupBox x:Name="Emission" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="1" Height="244" VerticalAlignment="Top" >
+            <TextBox x:Name="textBoxEmission" RenderTransformOrigin="6.886,5.186" Background="{x:Null}" BorderBrush="{x:Null}" AcceptsReturn="True" KeyUp="TextBoxKey_Up" TextChanged="textBoxEmission_TextChanged" Height="226" />
         </GroupBox>
-        <GroupBox x:Name="Réception" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1" >
-            <TextBox x:Name="textBoxReception" RenderTransformOrigin="6.886,5.186" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True" />
+        <GroupBox x:Name="Réception" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="3" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Height="244" VerticalAlignment="Top" >
+            <TextBox x:Name="textBoxReception" RenderTransformOrigin="6.886,5.186" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True" Height="240" VerticalAlignment="Top" Margin="1,0,-1,0" >
+                <TextBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.196"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="3.549"/>
+                    </TransformGroup>
+                </TextBox.RenderTransform>
+            </TextBox>
         </GroupBox>
-        <Button x:Name="buttonEnvoyer" Grid.Column="1" Content="Envoyer" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Click="ButtonEnvoyer_Click" Width="100" Height="30" Margin="0,28,0,0" Grid.RowSpan="2"/>
-        <Button x:Name="buttonClear" Grid.Column="3" Content="Clear" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Click="ButtonClear_Click" Width="100" Height="30" Margin="0,28,0,0" Grid.RowSpan="2"/>
-        <Button x:Name="buttonTest" Grid.Column="1" Content="Test" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Click="ButtonTest_Click" Width="100" Height="30" Margin="310,28,0,0" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+        <GroupBox x:Name="Leds" Header="Leds" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="2" Height="100" VerticalAlignment="Center" Margin="2,0,277,0" Width="70" >
+            <StackPanel Orientation="Vertical">
+                <CheckBox x:Name="LED1" Content="LED1" VerticalAlignment="Top" Checked="CheckBox_Checked">
+                </CheckBox>
+                <CheckBox x:Name="LED2" Content="LED2" VerticalAlignment="Center">
+                </CheckBox>
+                <CheckBox x:Name="LED3" Content="LED3" VerticalAlignment="Bottom">
+                </CheckBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="IR" Header="IR" Grid.Column="1" Grid.Row="2" Margin="75,10,145,9" Background="#FFDDDDDD" BorderBrush="Black" Width="140">
+            <StackPanel Orientation="Vertical">
+                <TextBlock  x:Name="IRLeft" Text="Capteur Gauche :"></TextBlock>
+                <TextBlock  x:Name="IRCenter" Text="Capteur Centre :"></TextBlock>
+                <TextBlock  x:Name="IRRight" Text="Capteur Droit :"></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="moteur" Header="Moteurs" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="2" Height="100" VerticalAlignment="Center" Margin="220,0,10,0" >
+            <StackPanel Orientation="Vertical">
+                <TextBlock  x:Name="MotorLeft" Text="Vitesse Gauche :"></TextBlock>
+                <TextBlock x:Name="MotorRight" Text="Vitesse Droite :"></TextBlock>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="buttonEnvoyer" Grid.Column="3" Content="Envoyer" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Click="ButtonEnvoyer_Click" Width="100" Height="30" Margin="10,10,0,0"/>
+        <Button x:Name="buttonClear" Grid.Column="3" Content="Clear" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Top" Click="ButtonClear_Click" Width="100" Height="30" Margin="0,10,0,0"/>
+        <Button x:Name="buttonTest" Grid.Column="3" Content="Test" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Click="ButtonTest_Click" Width="100" Height="30" Margin="245,10,0,0"/>
     </Grid>
 </Window>

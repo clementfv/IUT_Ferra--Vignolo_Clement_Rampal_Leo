@@ -48,12 +48,11 @@ namespace RobotInterface
 
 
         int Click, Click2 = 0;
-
         private void SendMessage()
         {
             string message = textBoxEmission.Text;
-            //textBoxReception.Text += "\n Reçu : " + message;
-            //textBoxEmission.Text = "";
+            textBoxReception.Text += "\n Reçu : " + message;
+            textBoxEmission.Text = "";
             serialPort1.WriteLine(message);
         }
 
@@ -120,18 +119,42 @@ namespace RobotInterface
             //    textBoxReception.Text+=("Le port série n'est pas ouvert !");
             //  }
 
-            var payload = Encoding.UTF8.GetBytes("Bonjour");
-            UartEncodeAndSendMessage(0x0080, payload.Length, payload);
-            textBoxReception.Text+=("Message envoyé !");
+            //var payload = Encoding.UTF8.GetBytes("Bonjour");
+            //UartEncodeAndSendMessage(0x0080, payload.Length, payload);
+            // textBoxReception.Text += ("Message envoyé !");
+            string randomText = "Message " + random.Next(100, 999);
+            byte[] textPayload = System.Text.Encoding.ASCII.GetBytes(randomText);
+            ProcessDecodedMessage((int)CommandID.TEXT, textPayload.Length, textPayload);
+
+            /*for (byte ledNum = 1; ledNum <= 2; ledNum++)
+            {
+                byte ledState = (byte)random.Next(0, 2);
+                byte[] ledPayload = new byte[] { ledNum, ledState };
+                ProcessDecodedMessage((int)CommandID.LED, ledPayload.Length, ledPayload);
+            }*/
+
+            byte[] irPayload = new byte[]
+            {
+        (byte)random.Next(10, 81), // gauche
+        (byte)random.Next(10, 81), // centre
+        (byte)random.Next(10, 81)  // droite
+            };
+            ProcessDecodedMessage((int)CommandID.IR_DISTANCE, irPayload.Length, irPayload);
+
+            byte[] speedPayload = new byte[]
+            {
+        (byte)random.Next(0, 101), // moteur gauche
+        (byte)random.Next(0, 101)  // moteur droit
+            };
+            ProcessDecodedMessage((int)CommandID.SPEED, speedPayload.Length, speedPayload);
         }
 
 
         public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            foreach (byte b in e.Data)
+            for (int i = 0; i < e.Data.Length; i++)
             {
-               robot.byteListReceived.Enqueue(b); 
-               DecodeMessage(b);
+                robot.byteListReceived.Enqueue(e.Data[i]);
             }
         }
 
@@ -145,11 +168,12 @@ namespace RobotInterface
                 {
                     byte b = robot.byteListReceived.Dequeue();
 
+                    DecodeMessage(b);
 
-                    sb.Append("0x" + b.ToString("X2") + " ");
+                    //sb.Append("0x" + b.ToString("X2") + " ");
                 }
 
-                textBoxReception.Text += sb.ToString() + "\n"; 
+                //textBoxReception.Text += sb.ToString() + "\n";
             }
         }
 
@@ -204,7 +228,7 @@ namespace RobotInterface
         byte checksumCalc = 0;
         byte checksumRecv = 0;
 
-       private void DecodeMessage(byte c)
+        private void DecodeMessage(byte c)
         {
             switch (rcvState)
             {
@@ -212,66 +236,119 @@ namespace RobotInterface
                     if (c == 0xFE)
                     {
                         rcvState = StateReception.FunctionMSB;
-                        checksumCalc = c;
                     }
                     break;
 
                 case StateReception.FunctionMSB:
-                    msgFunction = c << 8;
-                    checksumCalc ^= c;
+                    msgFunction = ((int)c << 8);
                     rcvState = StateReception.FunctionLSB;
                     break;
 
                 case StateReception.FunctionLSB:
-                    msgFunction |= c;
-                    checksumCalc ^= c;
+                    msgFunction += c;
                     rcvState = StateReception.PayloadLengthMSB;
                     break;
 
                 case StateReception.PayloadLengthMSB:
-                    msgPayloadLength = c << 8;
-                    checksumCalc ^= c;
+                    msgPayloadLength = ((int)c << 8);
                     rcvState = StateReception.PayloadLengthLSB;
                     break;
 
                 case StateReception.PayloadLengthLSB:
-                    msgPayloadLength |= c;
-                    checksumCalc ^= c;
-
-                    
+                    msgPayloadLength += c;
                     msgPayload = new byte[msgPayloadLength];
                     payloadIndex = 0;
-
-                    if (msgPayloadLength == 0)
-                        rcvState = StateReception.CheckSum;
-                    else
-                        rcvState = StateReception.Payload;
+                    rcvState = StateReception.Payload;
                     break;
 
                 case StateReception.Payload:
-                    msgPayload[payloadIndex++] = c;
-                    checksumCalc ^= c;
-
+                    msgPayload[payloadIndex] = c;
+                    payloadIndex++;
                     if (payloadIndex >= msgPayloadLength)
                         rcvState = StateReception.CheckSum;
                     break;
 
                 case StateReception.CheckSum:
                     checksumRecv = c;
+                    checksumCalc = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
                     if (checksumCalc == checksumRecv)
                     {
-                       
-                        textBoxReception.Text+=("Success, on a un message valide");
+                        textBoxReception.Text += "Message valide\n";
                     }
                     else
                     {
-                        textBoxReception.Text+=("Message invalide (checksum incorrect) !");
+                        textBoxReception.Text += "Message invalide (checksum incorrect)\n";
                     }
+                    rcvState = StateReception.Waiting;
+                    break;
 
-                    rcvState = StateReception.Waiting; 
+                default:
+                    rcvState = StateReception.Waiting;
                     break;
             }
-        } 
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private Random random = new Random();
+
+        
+
+        enum CommandID
+        {
+            TEXT = 0x0080,
+            //LED = 0x0020,
+            IR_DISTANCE = 0x0030,
+            SPEED = 0x0040
+        }
+
+        void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            switch ((CommandID)msgFunction)
+            {
+                case CommandID.TEXT:
+                    string text = System.Text.Encoding.ASCII.GetString(msgPayload, 0, msgPayloadLength);
+                    textBoxReception.AppendText("Texte reçu : " + text + "\n");
+                    break;
+
+                /*case CommandID.LED:
+                    byte ledNumber = msgPayload[0];
+                    byte ledState = msgPayload[1];
+
+                    if (ledNumber == 1)
+                    {
+                        LED1 = ledState;
+                    }
+                    else if (ledNumber == 2)
+                    {
+                        LED2 = ledState;
+                    }
+                    else if (ledNumber == 3)
+                    {
+                        LED3 = ledState;
+                    }
+                    break;*/
+
+
+                case CommandID.IR_DISTANCE:
+                    IRLeft.Text = "Capteur Gauche" + " " + msgPayload[0].ToString() + " cm";
+                    IRCenter.Text = "Capteur Centre" +" " + msgPayload[1].ToString() + " cm";
+                    IRRight.Text = "Capteur Droit" +" " + msgPayload[2].ToString() + " cm";
+                    break;
+
+                case CommandID.SPEED:
+                    MotorLeft.Text = "Vitesse Gauche" + " " + msgPayload[0].ToString() + "%";
+                    MotorRight.Text = "Vitesse Droite" + " " + msgPayload[1].ToString() + "%";
+                    break;
+
+                default:
+                    textBoxReception.AppendText($"Commande inconnue : 0x{msgFunction:X4}\n");
+                    break;
+            }
+        }
 
     }
+
 }
