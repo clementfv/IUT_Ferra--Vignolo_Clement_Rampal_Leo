@@ -1,49 +1,67 @@
 #include <xc.h>
 #include "UART_Protocol.h"
 
-unsigned char UartCalculateChecksum(int msgFunction,
-int msgPayloadLength, unsigned char* msgPayload)
-{
-//Fonction prenant entree la trame et sa longueur pour calculer le checksum
-  byte checksum = 0;
-  checksum ^= 0xFE;
-  checksum ^= (byte)(msgFunction >> 8);
-  checksum ^= (byte)(msgFunction >> 0);
-  checksum ^= (byte)(msgPayloadLength >> 8);
-  checksum ^= (byte)(msgPayloadLength >> 0);
-  for (int i = 0; i < msgPayloadLength; i++)
-  {
-      checksum ^= msgPayload[i];
-  }
+#define MAX_FRAME_SIZE 128
 
-  return checksum;
+unsigned char UartCalculateChecksum(
+        int msgFunction,
+        int msgPayloadLength,
+        unsigned char* msgPayload) {
+    unsigned char checksum = 0;
+    int i;
+
+    checksum ^= 0xFE;
+
+    checksum ^= (unsigned char) (msgFunction >> 8);
+    checksum ^= (unsigned char) (msgFunction & 0xFF);
+
+    checksum ^= (unsigned char) (msgPayloadLength >> 8);
+    checksum ^= (unsigned char) (msgPayloadLength & 0xFF);
+
+    /* Payload */
+    for (i = 0; i < msgPayloadLength; i++) {
+        checksum ^= msgPayload[i];
+    }
+
+    return checksum;
 }
-void UartEncodeAndSendMessage(int msgFunction,
-int msgPayloadLength, unsigned char* msgPayload)
-{
-//Fonction d?encodage et d?envoi d?un message
-int totalLength = 1 + 2 + 2 + msgPayloadLength + 1;
-byte[] frame = new byte[totalLength];
 
-int index = 0;
-frame[index++] = 0xFE;
+void UartEncodeAndSendMessage(
+        int msgFunction,
+        int msgPayloadLength,
+        unsigned char* msgPayload) {
+    unsigned char frame[MAX_FRAME_SIZE];
+    int index = 0;
+    int i;
+    unsigned char checksum;
 
+    /* Start byte */
+    frame[index++] = 0xFE;
 
-frame[index++] = (byte)(msgFunction >> 8);
-frame[index++] = (byte)(msgFunction >> 0);
+    /* Function (2 octets) */
+    frame[index++] = (unsigned char) (msgFunction >> 8);
+    frame[index++] = (unsigned char) (msgFunction & 0xFF);
 
+    /* Payload length (2 octets) */
+    frame[index++] = (unsigned char) (msgPayloadLength >> 8);
+    frame[index++] = (unsigned char) (msgPayloadLength & 0xFF);
 
-frame[index++] = (byte)(msgPayloadLength >> 8);
-frame[index++] = (byte)(msgPayloadLength >> 0);
+    /* Payload */
+    for (i = 0; i < msgPayloadLength; i++) {
+        frame[index++] = msgPayload[i];
+    }
 
-for (int i = 0; i < msgPayloadLength; i++)
-    frame[index++] = msgPayload[i];
+    /* Checksum */
+    checksum = UartCalculateChecksum(
+            msgFunction,
+            msgPayloadLength,
+            msgPayload
+            );
 
+    frame[index++] = checksum;
 
-frame[index++] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
-
-
-SendMessage(frame, frame.Length);
+    /* Envoi UART */
+    int SendMessage(frame, index);
 }
 //int msgDecodedFunction = 0;
 //int msgDecodedPayloadLength = 0;
