@@ -22,11 +22,11 @@ int ADCValue2;
 int ADCValue3;
 int ADCValue4;
 
-/* Payload UART */
-unsigned char payload[] = { 'B', 'o', 'n', 'j', 'o', 'u', 'r' };
+//unsigned char payload[] = { 'B', 'o', 'n', 'j', 'o', 'u', 'r' };
 
 unsigned char stateRobot;
 unsigned char nextStateRobot = 0;
+unsigned char payloadIR[3];
 
 int main(void) {
 
@@ -45,44 +45,52 @@ int main(void) {
     LED_ROUGE_2   = 1;
     LED_VERTE_2   = 1;
 
-    while (1) {
+while (1) {
+    if (ADCIsConversionFinished() == 1) {
+    ADCClearConversionFinishedFlag();
+    unsigned int * result = ADCGetResult();
 
-        /* ===== ADC ===== */
-        if (ADCIsConversionFinished() == 1) {
-            ADCClearConversionFinishedFlag();
-            unsigned int * result = ADCGetResult();
+    float volts = ((float) result[1]) * 3.3 / 4096;
+    robotState.distanceTelemetreGauche = 34 / volts - 5;
 
-            float volts = ((float) result[1]) * 3.3 / 4096;
-            robotState.distanceTelemetreGauche = 34 / volts - 5;
+    volts = ((float) result[2]) * 3.3 / 4096;
+    robotState.distanceTelemetreCentre = 34 / volts - 5;
 
-            volts = ((float) result[2]) * 3.3 / 4096;
-            robotState.distanceTelemetreCentre = 34 / volts - 5;
+    volts = ((float) result[3]) * 3.3 / 4096;
+    robotState.distanceTelemetreDroit = 34 / volts - 5;
 
-            volts = ((float) result[3]) * 3.3 / 4096;
-            robotState.distanceTelemetreDroit = 34 / volts - 5;
+    volts = ((float) result[4]) * 3.3 / 4096;
+    robotState.distanceTelemetreUltraDroit = 34 / volts - 5;
 
-            volts = ((float) result[4]) * 3.3 / 4096;
-            robotState.distanceTelemetreUltraDroit = 34 / volts - 5;
+    volts = ((float) result[0]) * 3.3 / 4096;
+    robotState.distanceTelemetreUltraGauche = 34 / volts - 5;
 
-            volts = ((float) result[0]) * 3.3 / 4096;
-            robotState.distanceTelemetreUltraGauche = 34 / volts - 5;
-        }
+    payloadIR[0] = (unsigned char) robotState.distanceTelemetreGauche;
+    payloadIR[1] = (unsigned char) robotState.distanceTelemetreCentre;
+    payloadIR[2] = (unsigned char) robotState.distanceTelemetreDroit;
 
-        /* ===== ENVOI UART ===== */
-        UartEncodeAndSendMessage(
-            0x0080,
-            sizeof(payload),
-            payload
-        );
+    UartEncodeAndSendMessage(0x0030, 3, payloadIR);
+}
 
-        __delay32(40000000);
 
-        /* ===== ECHO RX ===== */
-        int i;
-        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
-            unsigned char c = CB_RX1_Get();
-            SendMessage(&c, 1);
-        }
+    __delay32(1600000); 
+
+
+       
+//        UartEncodeAndSendMessage(
+//            0x0080,
+//            sizeof(payload),
+//            payload
+//        );
+//
+//        __delay32(40000000);
+
+    
+//        int i;
+//        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
+//            unsigned char c = CB_RX1_Get();
+//            SendMessage(&c, 1);
+//        }
 
         __delay32(10);
 
@@ -94,8 +102,6 @@ int main(void) {
         LED_BLANCHE_1= (robotState.distanceTelemetreUltraGauche < 30);
     }
 }
-
-/* ================= SYSTEME D?ETATS ROBOT ================= */
 
 void OperatingSystemLoop(void) {
     switch (stateRobot) {

@@ -39,10 +39,9 @@ U1STAbits.UTXEN = 1; // Enable UART Tx
 
 void SendMessageDirect(unsigned char* message, int length)
 {
-unsigned char i=0;
-for(i=0; i<length; i++)
-{
-while ( U1STAbits.UTXBF); // wait while Tx buffer full
-U1TXREG = *(message)++; // Transmit one character
-}
+    for (int i = 0; i < length; i++)
+    {
+        while (U1STAbits.UTXBF);  
+        U1TXREG = message[i];   
+    }
 }

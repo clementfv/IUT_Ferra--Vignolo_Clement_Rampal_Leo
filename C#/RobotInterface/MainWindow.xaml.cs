@@ -21,13 +21,13 @@ namespace RobotInterface
 
     public enum StateReception
     {
-        Waiting,          // On attend le début du message (0xFE)
-        FunctionMSB,      // Lecture du premier octet de la fonction
-        FunctionLSB,      // Lecture du deuxième octet de la fonction
-        PayloadLengthMSB, // Lecture du premier octet de la longueur
-        PayloadLengthLSB, // Lecture du deuxième octet de la longueur
-        Payload,          // Lecture du payload
-        CheckSum          // Lecture du checksum
+        Waiting,         
+        FunctionMSB,     
+        FunctionLSB,      
+        PayloadLengthMSB, 
+        PayloadLengthLSB, 
+        Payload,          
+        CheckSum          
     }
     public partial class MainWindow : Window
     {
@@ -273,15 +273,14 @@ namespace RobotInterface
                     checksumCalc = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
                     if (checksumCalc == checksumRecv)
                     {
-                        textBoxReception.Text += "Message valide\n";
+                        ProcessDecodedMessage(msgFunction, msgPayloadLength, msgPayload);
                     }
                     else
                     {
-                        textBoxReception.Text += "Message invalide (checksum incorrect)\n";
+                        textBoxReception.AppendText("Message invalide (checksum incorrect)\n");
                     }
                     rcvState = StateReception.Waiting;
                     break;
-
                 default:
                     rcvState = StateReception.Waiting;
                     break;
