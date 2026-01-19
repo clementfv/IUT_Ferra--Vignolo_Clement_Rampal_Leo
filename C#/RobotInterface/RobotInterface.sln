@@ -4,8 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotInterface", "RobotInterface.csproj", "{30BF934E-6C1E-4C06-8371-CBA9092D6B4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{072A4B11-E79A-4453-95A3-4F16A3718EEF} = {072A4B11-E79A-4453-95A3-4F16A3718EEF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendedSerialPort", "..\ExtendedSerialPort\ExtendedSerialPort.csproj", "{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardHook", "..\..\..\..\..\Users\E306-PC4\Downloads\KeyboardHook\KeyboardHook\KeyboardHook\KeyboardHook.csproj", "{072A4B11-E79A-4453-95A3-4F16A3718EEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
