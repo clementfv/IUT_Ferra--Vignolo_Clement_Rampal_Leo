@@ -50,7 +50,8 @@ namespace RobotInterface
             SPEED = 0x0040,
             STATE_TELEMETRY = 0x0050,
             SET_STATE = 0x0051,
-            SET_MANUAL_CONTROL = 0x0052
+            SET_MANUAL_CONTROL = 0x0052,
+            POSITION = 0x0061,
         }
 
         // Machine à états de réception
@@ -249,9 +250,14 @@ namespace RobotInterface
                     StateRobot currentState = (StateRobot)msgPayload[0];
                     textBoxReception.AppendText($"State: {currentState} - Time: {timestamp} ms\n");
                     break;
+                case CommandID.POSITION:
+                    robot.positionXOdo = BitConverter.ToSingle(msgPayload, 4);
+                    PositionX.Text = "Position x" + msgPayload[4];
+                    robot.positionYOdo = BitConverter.ToSingle(msgPayload, 8);
+                    PositionY.Text = "Position y" + msgPayload[8];
+                    break;
             }
         }
-
 
         private void ButtonEnvoyer_Click(object sender, RoutedEventArgs e)
         {
@@ -284,5 +290,6 @@ namespace RobotInterface
             byte[] irPayload = new byte[] { (byte)new Random().Next(10, 80), (byte)new Random().Next(10, 80), (byte)new Random().Next(10, 80) };
             ProcessDecodedMessage((int)CommandID.IR_DISTANCE, 3, irPayload);
         }
+
     }
 }

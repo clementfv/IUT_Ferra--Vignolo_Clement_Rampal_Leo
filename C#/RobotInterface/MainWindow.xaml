@@ -71,6 +71,8 @@
                     <TextBlock x:Name="MotorRight" Text="Vitesse Droite :  %" Margin="2"/>
                 </StackPanel>
             </GroupBox>
+            <TextBlock x:Name="PositionX" Text="Position x :  " Height="26" Width="81"/>
+            <TextBlock x:Name="PositionY" Text="Position y :  " Width="81" Height="75"/>
 
         </StackPanel>
 
