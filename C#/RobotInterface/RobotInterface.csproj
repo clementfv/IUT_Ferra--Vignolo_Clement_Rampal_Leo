@@ -9,7 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExtendedSerialPort\ExtendedSerialPort.csproj" />
+    <ProjectReference Include="..\ExtendedSerialPort\ExtendedSerialPort\ExtendedSerialPort.csproj" />
+    <ProjectReference Include="..\KeyboardHook\KeyboardHook\KeyboardHook.csproj" />
+    <ProjectReference Include="..\WpfAsservissementDisplay\WpfAsservissementDisplay.csproj" />
+    <ProjectReference Include="..\WpfOscilloscope\WpfOscilloscopeControl.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="KeyboardHook">
+      <HintPath>..\KeyboardHook\bin\Release\net6.0\KeyboardHook.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

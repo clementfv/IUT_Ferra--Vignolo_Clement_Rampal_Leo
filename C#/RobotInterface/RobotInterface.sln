@@ -1,16 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotInterface", "RobotInterface.csproj", "{30BF934E-6C1E-4C06-8371-CBA9092D6B4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotInterface", "RobotInterface.csproj", "{2A9E7CA3-D9BB-41CA-928D-1C1569CED004}"
 	ProjectSection(ProjectDependencies) = postProject
-		{072A4B11-E79A-4453-95A3-4F16A3718EEF} = {072A4B11-E79A-4453-95A3-4F16A3718EEF}
+		{88BAA407-3FEA-4F4B-BB41-5309CE48884E} = {88BAA407-3FEA-4F4B-BB41-5309CE48884E}
+		{9DFDAA9D-F52C-4730-BB0E-046B3E6DB763} = {9DFDAA9D-F52C-4730-BB0E-046B3E6DB763}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendedSerialPort", "..\ExtendedSerialPort\ExtendedSerialPort.csproj", "{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtendedSerialPort", "..\ExtendedSerialPort\ExtendedSerialPort\ExtendedSerialPort.csproj", "{339B184A-F2B3-43CA-92BE-CA7EB0C88FB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardHook", "..\..\..\..\..\Users\E306-PC4\Downloads\KeyboardHook\KeyboardHook\KeyboardHook\KeyboardHook.csproj", "{072A4B11-E79A-4453-95A3-4F16A3718EEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAsservissementDisplay", "..\WpfAsservissementDisplay\WpfAsservissementDisplay.csproj", "{9DFDAA9D-F52C-4730-BB0E-046B3E6DB763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfOscilloscopeControl", "..\WpfOscilloscope\WpfOscilloscopeControl.csproj", "{88BAA407-3FEA-4F4B-BB41-5309CE48884E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardHook", "..\KeyboardHook\KeyboardHook\KeyboardHook.csproj", "{15A6DAA0-52F4-4706-ABE6-AC2F8491D63A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,18 +23,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{30BF934E-6C1E-4C06-8371-CBA9092D6B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30BF934E-6C1E-4C06-8371-CBA9092D6B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30BF934E-6C1E-4C06-8371-CBA9092D6B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30BF934E-6C1E-4C06-8371-CBA9092D6B4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6CD7EB8-CBAA-41DB-8FDD-EBAFD17E0DDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{072A4B11-E79A-4453-95A3-4F16A3718EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9E7CA3-D9BB-41CA-928D-1C1569CED004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9E7CA3-D9BB-41CA-928D-1C1569CED004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9E7CA3-D9BB-41CA-928D-1C1569CED004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9E7CA3-D9BB-41CA-928D-1C1569CED004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{339B184A-F2B3-43CA-92BE-CA7EB0C88FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{339B184A-F2B3-43CA-92BE-CA7EB0C88FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{339B184A-F2B3-43CA-92BE-CA7EB0C88FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{339B184A-F2B3-43CA-92BE-CA7EB0C88FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFDAA9D-F52C-4730-BB0E-046B3E6DB763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFDAA9D-F52C-4730-BB0E-046B3E6DB763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFDAA9D-F52C-4730-BB0E-046B3E6DB763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFDAA9D-F52C-4730-BB0E-046B3E6DB763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88BAA407-3FEA-4F4B-BB41-5309CE48884E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88BAA407-3FEA-4F4B-BB41-5309CE48884E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88BAA407-3FEA-4F4B-BB41-5309CE48884E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88BAA407-3FEA-4F4B-BB41-5309CE48884E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A6DAA0-52F4-4706-ABE6-AC2F8491D63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A6DAA0-52F4-4706-ABE6-AC2F8491D63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A6DAA0-52F4-4706-ABE6-AC2F8491D63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A6DAA0-52F4-4706-ABE6-AC2F8491D63A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
