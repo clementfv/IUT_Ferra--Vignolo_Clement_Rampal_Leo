@@ -1,5 +1,3 @@
-build/default/production/ChipConfig.o: ChipConfig.c ChipConfig.h timer.h
+build/default/production/ChipConfig.o: ChipConfig.c ChipConfig.h
 
 ChipConfig.h:
-
-timer.h:

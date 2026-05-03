@@ -20,28 +20,33 @@ U1MODEbits.UARTEN = 1; // Enable UART
 U1STAbits.UTXEN = 1; // Enable UART Tx
 }
 
-//Interruption en mode loopback
-//void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
-//IFS0bits.U1RXIF = 0; // clear RX interrupt flag
-///* check for receive errors */
-//if (U1STAbits.FERR == 1) {
-//U1STAbits.FERR = 0;
-//}
-///* must clear the overrun error to keep uart receiving */
-//if (U1STAbits.OERR == 1) {
-//U1STAbits.OERR = 0;
-//}
-///* get the data */
-//while (U1STAbits.URXDA == 1) {
-//U1TXREG = U1RXREG;
-//}
-//}
+
+//Définit les données reçus sur le port série : 1 bit de stop, pas parité ,
+//Paramètre du Vitesse de transmission
 
 void SendMessageDirect(unsigned char* message, int length)
 {
-    for (int i = 0; i < length; i++)
-    {
-        while (U1STAbits.UTXBF);  
-        U1TXREG = message[i];   
-    }
+unsigned char i=0;
+for(i=0; i<length; i++)
+{
+while ( U1STAbits.UTXBF); // wait while Tx buffer full
+U1TXREG = *(message)++; // Transmit one character
 }
+}
+
+
+//void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
+//IFS0bits.U1RXIF = 0; // clear RX interrupt flag
+//// check for receive errors 
+//if (U1STAbits.FERR == 1) {
+//U1STAbits.FERR = 0;
+//}
+//// must clear the overrun error to keep uart receiving 
+//if (U1STAbits.OERR == 1) {
+//U1STAbits.OERR = 0;
+//}
+//// get the data 
+//while (U1STAbits.URXDA == 1) {
+//U1TXREG = U1RXREG;
+//}
+//} 

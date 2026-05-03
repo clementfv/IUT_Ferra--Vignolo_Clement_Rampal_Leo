@@ -1,10 +1,11 @@
+
 /*
  * File:   IO.c
  */
 
 #include <xc.h>
 #include "IO.h"
-#include "timer.h"
+
 void InitIO()
 {
     //****************************************************************************************************/
@@ -16,6 +17,14 @@ void InitIO()
     ANSELC=0;             //Desactivation de toutes entree analogique
     ANSELE=0;             //Desactivation de toutes entree analogique
     ANSELG=0;             //Desactivation de toutes entree analogique
+    
+    
+    //******************** QEI ***************** TP3
+    _QEA2R = 97; //assign QEI A to pin RP97
+    _QEB2R = 113; //assign QEI B to pin RP96
+    _QEA1R = 126; //assign QEI A to pin RP70
+    _QEB1R = 124; //assign QEI B to pin RP69
+
 
     // Configuration des sorties
 
@@ -24,13 +33,19 @@ void InitIO()
     _TRISJ5 = 0; //LED Blanche
     _TRISJ4 = 0; // LED Bleue
     _TRISJ11 = 0; // LED Rouge
-    _TRISH10 = 0; // LED Verte 
-    _TRISK15 = 0;  // LED Orange 2
-    _TRISA0 = 0; //LED Blanche 2
-    _TRISA9 = 0; // LED Bleue 2
-    _TRISA10 = 0; // LED Rouge 2
-    _TRISH3 = 0; // LED Verte 2
-    _TRISH0 = 1; //switch button (Inter1))
+    _TRISH10 = 0; // LED Verte
+    
+    //Prend les 2 derniers caractères avec _TRIS 
+    _TRISA9 = 0; // LED Bleu
+    _TRISA10 = 0; // LED Rouge 
+    _TRISH3 = 0; // LED Vert
+    _TRISK15 = 0; // LED Orange
+     _TRISA0 = 0; // LED Blanche
+    
+    
+     _TRISJ10 = 0; // EN PWM
+
+    
     //****** Moteurs ************************
 
     // Configuration des entrées
@@ -40,11 +55,9 @@ void InitIO()
     // Gestion des pin remappables
     /****************************************************************************************************/
     UnlockIO(); // On unlock les registres d'entrées/sorties, ainsi que les registres des PPS
-    
-    //Assignation des remappable pins
-        _U1RXR = 78; //Remappe la RP... sur l?éentre Rx1
-        _RP79R = 0b00001; //Remappe la sortie Tx1 vers RP...
-
+    _U1RXR = 78; //Remappe la RP... sur l?éentre Rx1
+    _RP79R = 0b00001; //Remappe la sortie Tx1 vers RP... 
+   //Assignation des remappable pins
         
     LockIO(); // On lock les registres d'entrées/sorties, ainsi que les registres des PPS
 }

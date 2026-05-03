@@ -1,7 +1,3 @@
-build/default/production/ADC.o: ADC.c ADC.h main.h timer.h
+build/default/production/ADC.o: ADC.c adc.h
 
-ADC.h:
-
-main.h:
-
-timer.h:
+adc.h:

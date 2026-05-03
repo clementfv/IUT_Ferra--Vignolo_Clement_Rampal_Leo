@@ -4,13 +4,11 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>Robot_Rampal_Ferra</name>
-            <creation-uuid>3c8d00a0-ab28-4f10-8f85-c72beef1ce3f</creation-uuid>
+            <creation-uuid>a1039e63-ddf0-459e-a0d3-2d1e1144b14c</creation-uuid>
             <make-project-type>0</make-project-type>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList>
-                <sourceRootElem>.</sourceRootElem>
-            </sourceRootList>
+            <sourceRootList/>
             <confList>
                 <confElem>
                     <name>default</name>
